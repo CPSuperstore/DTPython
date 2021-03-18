@@ -17,6 +17,8 @@ class DTPClient:
         self.s.sendto(message, (self.broadcast_address, self.port))
 
     def broadcast(self, message: str):
+        message = "{}|{}".format(str(self.identifier), message)
+
         message = coder.encode_message(message)
         self.broadcast_raw(message)
 

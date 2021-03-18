@@ -2,6 +2,7 @@ from socket import *
 import DTPython
 import typing
 import DTPython.coder as coder
+import DTPython.message as message
 
 
 class DTPServer:
@@ -11,9 +12,11 @@ class DTPServer:
         self.s = socket(AF_INET, SOCK_DGRAM)
         self.s.bind(('', DTPython.PORT))
 
-    def listen(self) -> typing.Tuple[str, typing.Tuple[str, int]]:
+    def listen(self) -> typing.Tuple[message.Message, typing.Tuple[str, int]]:
         m = self.listen_raw()
-        msg = coder.decode_message(m[0])
+        msg = coder.decode_message(m[0]).split("|")
+        msg = message.Message(msg[0], msg[1])
+
         return msg, m[1]
 
     def listen_raw(self) -> typing.Tuple[bytes, typing.Tuple[str, int]]:

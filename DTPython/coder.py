@@ -5,7 +5,7 @@ CHAR_TO_BIN = b'0123456789,\n.-|\0'
 STR_TO_BIN = CHAR_TO_BIN.decode("utf8")
 
 
-def encode_message(message: typing.Union[str, bytes], encoding: str = "UTF-8") -> bytes:
+def encode_message(message: typing.Union[str, bytes], encoding: str = "latin1") -> bytes:
     if isinstance(message, str):
         message = message.encode(encoding)
 
